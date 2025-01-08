@@ -1,231 +1,399 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mobile Optimized Website</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            direction: rtl;
-            background-color: #121212;
-            color: #ffffff;
-        }
+      @import url("https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font/dist/font-face.css");
 
-        .page {
-            display: none;
-            padding: 20px;
-        }
+      body {
+        font-family: "Vazir", Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        direction: rtl;
+        background-color: #121212;
+        color: #ffffff;
+      }
+      .fab {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background-color: #1e88e5;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        z-index: 1000;
+      }
 
-        .active {
-            display: block;
-        }
+      .fab:hover {
+        background-color: #1565c0;
+      }
 
-        .title {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+      .page {
+        display: none;
+        padding: 20px;
+        min-height: 100vh;
+      }
 
-        .button {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #1e88e5;
-            color: #ffffff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+      .active-page {
+        display: block;
+      }
 
-        .button:hover {
-            background-color: #1565c0;
-        }
+      .title {
+        text-align: center;
+        margin-bottom: 20px;
+      }
 
-        .tabs {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 20px;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-        }
+      .button {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #1e88e5;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
 
-        .tab {
-            cursor: pointer;
-            padding: 10px;
-            background-color: #333333;
-            border-radius: 5px;
-            color: #ffffff;
-            flex-shrink: 0;
-            text-align: center;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-        }
+      .button:hover {
+        background-color: #1565c0;
+      }
 
-        .tab.active {
-            background-color: #1e88e5;
-            color: #ffffff;
-            transform: scale(1.1);
-        }
+      .tab-content {
+        margin-top: 20px;
+      }
 
-        .grid {
-            display: none;
-            border: 1px solid #444;
-            border-radius: 5px;
-            overflow: hidden;
-        }
+      .grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+        padding: 10px;
+      }
 
-        .grid.active {
-            display: block;
-            margin: auto;
-            max-width: 600px;
-        }
+      .card {
+        background-color: #222;
+        border: 1px solid #444;
+        border-radius: 10px;
+        width: calc(100% - 30px);
+        max-width: 300px;
+      }
 
-        .card {
-            margin: 10px;
-            background-color: #222;
-            border-radius: 10px;
-            border: 1px solid #444;
-        }
+      .card img {
+        border-radius: 10px 10px 0 0;
+        cursor: pointer;
+      }
 
-        .card-body {
-            padding: 15px;
-        }
+      .card-body {
+        padding: 15px;
+      }
 
-        .fullscreen {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
+      .fullscreen {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
 
-        .fullscreen img {
-            max-width: 90%;
-            max-height: 90%;
-        }
-
-        .tab-title {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 18px;
-        }
-
-        .table-bordered {
-            border: 1px solid #444;
-            background-color: #222;
-            border-radius: 10px;
-            overflow: hidden;
-        }
+      .fullscreen img {
+        max-width: 90%;
+        max-height: 90%;
+      }
     </style>
-</head>
-<body>
-    <div id="page1" class="page active">
-        <div class="title">
-            <h1>به وبسایت خوش آمدید</h1>
-            <p>نام 1</p>
-            <p>نام 2</p>
-        </div>
-        <button class="button" onclick="navigateToPage(2)">برو به جدول</button>
+  </head>
+  <body>
+    <div id="page1" class="page active-page">
+      <div class="title">
+        <h1>به وبسایت خوش آمدید</h1>
+        <p>استاد استاد</p>
+        <p>مائده مائده</p>
+      </div>
+      <button class="button" onclick="navigateToPage(2)">برو به جدول</button>
     </div>
 
     <div id="page2" class="page">
-        <div class="tabs" id="tabs-container">
-            <div class="tab active" onclick="showTab(0, 'تب ۱')">تب ۱</div>
-            <div class="tab" onclick="showTab(1, 'تب ۲')">تب ۲</div>
-            <div class="tab" onclick="showTab(2, 'تب ۳')">تب ۳</div>
-            <div class="tab" onclick="showTab(3, 'تب ۴')">تب ۴</div>
-            <div class="tab" onclick="showTab(4, 'تب ۵')">تب ۵</div>
-            <div class="tab" onclick="showTab(5, 'تب ۶')">تب ۶</div>
-        </div>
-        <div class="tab-title" id="tab-title">تب ۱</div>
-        <div id="grid-container">
-            <div class="grid active table-bordered">
-                <div class="card">
-                    <img src="images/image1.jpg" class="card-img-top" alt="تصویر ۱" onclick="showFullscreen(this)">
-                    <div class="card-body">
-                        <p class="card-text">توضیحات برای تصویر ۱</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="image2.jpg" class="card-img-top" alt="تصویر ۲" onclick="showFullscreen(this)">
-                    <div class="card-body">
-                        <p class="card-text">توضیحات برای تصویر ۲</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="image3.jpg" class="card-img-top" alt="تصویر ۳" onclick="showFullscreen(this)">
-                    <div class="card-body">
-                        <p class="card-text">توضیحات برای تصویر ۳</p>
-                    </div>
-                </div>
+      <div class="fab" onclick="navigateToPage(1)">
+        <i class="fas fa-home"></i>
+      </div>
+
+      <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link active"
+            id="tab1-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#tab1"
+            type="button"
+            role="tab"
+            aria-controls="tab1"
+            aria-selected="true"
+          >
+            تب ۱
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="tab2-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#tab2"
+            type="button"
+            role="tab"
+            aria-controls="tab2"
+            aria-selected="false"
+          >
+            تب ۲
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="tab3-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#tab3"
+            type="button"
+            role="tab"
+            aria-controls="tab3"
+            aria-selected="false"
+          >
+            تب ۳
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="tab4-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#tab4"
+            type="button"
+            role="tab"
+            aria-controls="tab4"
+            aria-selected="false"
+          >
+            تب ۴
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="tab5-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#tab5"
+            type="button"
+            role="tab"
+            aria-controls="tab5"
+            aria-selected="false"
+          >
+            تب ۵
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div
+          class="tab-pane fade show active"
+          id="tab1"
+          role="tabpanel"
+          aria-labelledby="tab1-tab"
+        >
+          <div class="grid">
+            <div class="card">
+              <img
+                src="images/image1.jpg"
+                class="card-img-top"
+                alt="تصویر ۱"
+                onclick="showFullscreen(this)"
+              />
+              <div class="card-body">
+                <p class="card-text">
+                  حامی پوشش زنده سریال بازی مرکب. نت‌باکس یک اندروید باکس است که
+                  تلویزیون معمولی شما را به یک تلویزیون هوشمند واقعی تبدیل
+                  می‌کند. با نت‌باکس می‌توانید به مجموعه‌ای کامل از فیلم و
+                  سریال‌های پلتفرم‌های مختلف دسترسی پیدا کنید.
+                </p>
+              </div>
             </div>
-            <!-- Additional grids for other tabs -->
-            <div class="grid table-bordered">
-                <div class="card">
-                    <img src="image4.jpg" class="card-img-top" alt="تصویر ۴" onclick="showFullscreen(this)">
-                    <div class="card-body">
-                        <p class="card-text">توضیحات برای تصویر ۴</p>
-                    </div>
-                </div>
-                <!-- Add more parts as needed -->
+            <!-- Additional cards here -->
+            <div class="card">
+              <img
+                src="images/image1.jpg"
+                class="card-img-top"
+                alt="تصویر ۱"
+                onclick="showFullscreen(this)"
+              />
+              <div class="card-body">
+                <p class="card-text">توضیحات تصویر ۲</p>
+              </div>
             </div>
-            <!-- Repeat structure for other tabs -->
+            <!-- Additional cards here -->
+            <div class="card">
+              <img
+                src="images/image1.jpg"
+                class="card-img-top"
+                alt="تصویر ۱"
+                onclick="showFullscreen(this)"
+              />
+              <div class="card-body">
+                <p class="card-text">
+                  حامی پوشش زنده سریال بازی مرکب. نت‌باکس یک اندروید باکس است که
+                  تلویزیون معمولی شما را به یک تلویزیون هوشمند واقعی تبدیل
+                  می‌کند. با نت‌باکس می‌توانید به مجموعه‌ای کامل از فیلم و
+                  سریال‌های پلتفرم‌های مختلف دسترسی پیدا کنید.
+                </p>
+              </div>
+            </div>
+            <!-- Additional cards here -->
+          </div>
         </div>
+        <!-- Repeat similar structure for tabs 2-5 -->
+        <div
+          class="tab-pane fade"
+          id="tab2"
+          role="tabpanel"
+          aria-labelledby="tab2-tab"
+        >
+          <div class="grid">
+            <div class="card">
+              <img
+                src="images/image1.jpg"
+                class="card-img-top"
+                alt="تصویر ۲"
+                onclick="showFullscreen(this)"
+              />
+              <div class="card-body">
+                <p class="card-text">
+                  حامی پوشش زنده سریال بازی مرکب. نت‌باکس یک اندروید باکس است که
+                  تلویزیون معمولی شما را به یک تلویزیون هوشمند واقعی تبدیل
+                  می‌کند. با نت‌باکس می‌توانید به مجموعه‌ای کامل از فیلم و
+                  سریال‌های پلتفرم‌های مختلف دسترسی پیدا کنید.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Add more cards for tab 3, 4, and 5 as needed -->
+        <div
+          class="tab-pane fade"
+          id="tab3"
+          role="tabpanel"
+          aria-labelledby="tab3-tab"
+        >
+          <div class="grid">
+            <div class="card">
+              <img
+                src="images/image1.jpg"
+                class="card-img-top"
+                alt="تصویر ۲"
+                onclick="showFullscreen(this)"
+              />
+              <div class="card-body">
+                <p class="card-text">
+                  حامی پوشش زنده سریال بازی مرکب. نت‌باکس یک اندروید باکس است که
+                  تلویزیون معمولی شما را به یک تلویزیون هوشمند واقعی تبدیل
+                  می‌کند. با نت‌باکس می‌توانید به مجموعه‌ای کامل از فیلم و
+                  سریال‌های پلتفرم‌های مختلف دسترسی پیدا کنید.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Add more cards for tab 3, 4, and 5 as needed -->
+        <div
+          class="tab-pane fade"
+          id="tab4"
+          role="tabpanel"
+          aria-labelledby="tab4-tab"
+        >
+          <div class="grid">
+            <div class="card">
+              <img
+                src="images/image1.jpg"
+                class="card-img-top"
+                alt="تصویر ۲"
+                onclick="showFullscreen(this)"
+              />
+              <div class="card-body">
+                <p class="card-text">
+                  حامی پوشش زنده سریال بازی مرکب. نت‌باکس یک اندروید باکس است که
+                  تلویزیون معمولی شما را به یک تلویزیون هوشمند واقعی تبدیل
+                  می‌کند. با نت‌باکس می‌توانید به مجموعه‌ای کامل از فیلم و
+                  سریال‌های پلتفرم‌های مختلف دسترسی پیدا کنید.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Add more cards for tab 3, 4, and 5 as needed -->
+        <div
+          class="tab-pane fade"
+          id="tab5"
+          role="tabpanel"
+          aria-labelledby="tab5-tab"
+        >
+          <div class="grid">
+            <div class="card">
+              <img
+                src="images/image1.jpg"
+                class="card-img-top"
+                alt="تصویر ۲"
+                onclick="showFullscreen(this)"
+              />
+              <div class="card-body">
+                <p class="card-text">توضیحات تصویر ۲</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Add more cards for tab 3, 4, and 5 as needed -->
+      </div>
     </div>
 
     <div class="fullscreen" id="fullscreen" onclick="hideFullscreen()">
-        <img id="fullscreenImage" src="" alt="تمام صفحه">
+      <img id="fullscreenImage" src="" alt="تمام صفحه" />
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function navigateToPage(pageNumber) {
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.getElementById(`page${pageNumber}`).classList.add('active');
-        }
+      function navigateToPage(pageNumber) {
+        document
+          .querySelectorAll(".page")
+          .forEach((page) => page.classList.remove("active-page"));
+        document
+          .getElementById(`page${pageNumber}`)
+          .classList.add("active-page");
+      }
 
-        function showTab(tabIndex, tabTitle) {
-            const tabs = document.querySelectorAll('.tab');
-            const grids = document.querySelectorAll('.grid');
-            const tabContainer = document.getElementById('tabs-container');
+      function showFullscreen(image) {
+        const fullscreen = document.getElementById("fullscreen");
+        const fullscreenImage = document.getElementById("fullscreenImage");
+        fullscreenImage.src = image.src;
+        fullscreen.style.display = "flex";
+      }
 
-            tabs.forEach((tab, index) => {
-                tab.classList.toggle('active', index === tabIndex);
-            });
-
-            grids.forEach((grid, index) => {
-                grid.classList.toggle('active', index === tabIndex);
-            });
-
-            document.getElementById('tab-title').innerText = tabTitle;
-
-            // Scroll the selected tab to the center
-            const selectedTab = tabs[tabIndex];
-            const tabContainerWidth = tabContainer.offsetWidth;
-            const selectedTabWidth = selectedTab.offsetWidth;
-            const scrollLeft = selectedTab.offsetLeft - (tabContainerWidth / 2) + (selectedTabWidth / 2);
-
-            tabContainer.scrollTo({ left: scrollLeft, behavior: 'smooth' });
-        }
-
-        function showFullscreen(image) {
-            const fullscreen = document.getElementById('fullscreen');
-            const fullscreenImage = document.getElementById('fullscreenImage');
-            fullscreenImage.src = image.src;
-            fullscreen.style.display = 'flex';
-        }
-
-        function hideFullscreen() {
-            document.getElementById('fullscreen').style.display = 'none';
-        }
+      function hideFullscreen() {
+        document.getElementById("fullscreen").style.display = "none";
+      }
     </script>
-</body>
+  </body>
 </html>
