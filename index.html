@@ -22,15 +22,19 @@
         direction: rtl;
         background-color: #121212;
         color: #ff0000;
+        background-image: url('images/bg.jpg'); /* Background pattern */
+        background-repeat: repeat; /* Repeat the pattern */
+        background-size: auto;
       }
+
       .fab {
         position: fixed;
         bottom: 20px;
         right: 20px;
         width: 60px;
         height: 60px;
-        background-color: #1e88e5;
-        color: white;
+        background-color: #ffffff;
+        color: rgb(0, 0, 0);
         border-radius: 50%;
         display: flex;
         justify-content: center;
@@ -41,7 +45,7 @@
       }
 
       .fab:hover {
-        background-color: #1565c0;
+        background-color: #1e88e5;
       }
 
       .page {
@@ -50,8 +54,8 @@
         left: 0;
         width: 100%;
         height: 100%;
-        visibility: hidden; /* All pages are hidden by default */
-        z-index: 0; /* Default stacking order */
+        visibility: hidden;
+        z-index: 0;
       }
 
       .active-page {
@@ -69,8 +73,8 @@
         margin: 20px auto;
         padding: 10px 20px;
         font-size: 16px;
-        background-color: #1e88e5;
-        color: #ffffff;
+        background-color: #ffffff;
+        color: #000000;
         border: none;
         border-radius: 5px;
         cursor: pointer;
@@ -80,51 +84,78 @@
         background-color: #1565c0;
       }
 
-      .tab-content {
-        margin-top: 20px;
-      }
-
-      .grid {
+      .round-btns {
         display: flex;
-        flex-wrap: wrap;
-        gap: 15px;
-        justify-content: center;
-        padding: 10px;
+        flex-direction: column; /* Keep the buttons in a column */
+        gap: 20px; /* Space between buttons */
+        justify-content: center; /* Vertically center buttons */
+        align-items: center; /* Horizontally center buttons */
+        height: 100vh; /* Take full height of the screen */
+        padding: 0; /* Remove any padding to center exactly */
       }
 
-      .card {
-        background-color: #222;
-        border: 1px solid #444;
-        border-radius: 10px;
-        width: calc(100% - 30px);
-        max-width: 300px;
-      }
-
-      .card img {
-        border-radius: 10px 10px 0 0;
-        cursor: pointer;
-      }
-
-      .card-body {
-        padding: 15px;
-      }
-
-      .fullscreen {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.9);
+      .round-btn {
+        display: flex;
         justify-content: center;
         align-items: center;
-        z-index: 1000;
+        background-color: #ffffff;
+        color: rgb(0, 0, 0);
+        border-radius: 50px;
+        padding: 10px 20px;
+        width: 80%; /* Adjust width if needed */
+        cursor: pointer;
+        text-align: left;
+        border: 1px solid #333;
+        transition: background-color 0.3s, transform 0.3s; /* Add smooth scaling transition */
       }
 
-      .fullscreen img {
-        max-width: 90%;
-        max-height: 90%;
+      .round-btn:hover {
+        background-color: #1e88e5;
+        transform: scale(1.05); /* Slightly increase the size on hover */
+      }
+
+      .round-btn img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+      .round-btn span {
+        font-size: 18px;
+      }
+
+      .modal-content {
+        background-color: #333;
+        color: white;
+      }
+
+      .modal-body {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+      }
+
+      .modal-card {
+        background-color: #444;
+        width: 280px;
+        border-radius: 10px;
+        display: flex;
+        overflow: hidden;
+        border: 1px solid #ffffff;
+      }
+
+      .modal-card img {
+        width: 120px;
+        object-fit: cover;
+      }
+
+      .modal-card-body {
+        padding: 10px;
+        flex: 1;
       }
     </style>
   </head>
@@ -132,7 +163,11 @@
     <div
       id="page1"
       class="page active-page d-flex flex-column justify-content-center align-items-center vh-100 text-center bg-primary text-white"
-    >
+    style="
+    background-image: url('images/bg1.jpg'); /* Background pattern */
+    background-repeat: repeat; /* Repeat the pattern */
+    background-size: auto;"
+      >
       <div class="container">
         <div class="mb-4">
           <h1 class="display-4 fw-bold">به وبسایت خوش آمدید</h1>
@@ -153,240 +188,78 @@
       <div class="fab" onclick="navigateToPage(1)">
         <i class="fas fa-home"></i>
       </div>
-
-      <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-          <button
-            class="nav-link active"
-            id="tab1-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#tab1"
-            type="button"
-            role="tab"
-            aria-controls="tab1"
-            aria-selected="true"
-          >
-            تب ۱
-          </button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button
-            class="nav-link"
-            id="tab2-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#tab2"
-            type="button"
-            role="tab"
-            aria-controls="tab2"
-            aria-selected="false"
-          >
-            تب ۲
-          </button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button
-            class="nav-link"
-            id="tab3-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#tab3"
-            type="button"
-            role="tab"
-            aria-controls="tab3"
-            aria-selected="false"
-          >
-            تب ۳
-          </button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button
-            class="nav-link"
-            id="tab4-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#tab4"
-            type="button"
-            role="tab"
-            aria-controls="tab4"
-            aria-selected="false"
-          >
-            تب ۴
-          </button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button
-            class="nav-link"
-            id="tab5-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#tab5"
-            type="button"
-            role="tab"
-            aria-controls="tab5"
-            aria-selected="false"
-          >
-            تب ۵
-          </button>
-        </li>
-      </ul>
-      <div class="tab-content" id="myTabContent">
-        <div
-          class="tab-pane fade show active"
-          id="tab1"
-          role="tabpanel"
-          aria-labelledby="tab1-tab"
-        >
-          <div class="grid">
-            <div class="card">
-              <img
-                src="images/image1.jpg"
-                class="card-img-top"
-                alt="تصویر ۱"
-                onclick="showFullscreen(this)"
-              />
-              <div class="card-body">
-                <p class="card-text" style="color: #ffffff">
-                  حامی پوشش زنده سریال بازی مرکب. نت‌باکس یک اندروید باکس است که
-                  تلویزیون معمولی شما را به یک تلویزیون هوشمند واقعی تبدیل
-                  می‌کند. با نت‌باکس می‌توانید به مجموعه‌ای کامل از فیلم و
-                  سریال‌های پلتفرم‌های مختلف دسترسی پیدا کنید.
-                </p>
-              </div>
-            </div>
-            <!-- Additional cards here -->
-            <div class="card">
-              <img
-                src="images/image1.jpg"
-                class="card-img-top"
-                alt="تصویر ۱"
-                onclick="showFullscreen(this)"
-              />
-              <div class="card-body">
-                <p class="card-text" style="color: #ffffff">توضیحات تصویر ۲</p>
-              </div>
-            </div>
-            <!-- Additional cards here -->
-            <div class="card">
-              <img
-                src="images/image1.jpg"
-                class="card-img-top"
-                alt="تصویر ۱"
-                onclick="showFullscreen(this)"
-              />
-              <div class="card-body">
-                <p class="card-text" style="color: #ffffff">
-                  حامی پوشش زنده سریال بازی مرکب. نت‌باکس یک اندروید باکس است که
-                  تلویزیون معمولی شما را به یک تلویزیون هوشمند واقعی تبدیل
-                  می‌کند. با نت‌باکس می‌توانید به مجموعه‌ای کامل از فیلم و
-                  سریال‌های پلتفرم‌های مختلف دسترسی پیدا کنید.
-                </p>
-              </div>
-            </div>
-            <!-- Additional cards here -->
-          </div>
+      
+      <!-- Round Buttons Listed Below Each Other -->
+      <div class="round-btns">
+        <!-- Repeat this block for each button -->
+        <div class="round-btn" onclick="showModal(1)" style="margin-left: 50px;">
+          <span>عنتوضیحاتوان ۱</span>
+          <img src="images/image2.jpg" alt="Button 1" />
         </div>
-        <!-- Repeat similar structure for tabs 2-5 -->
-        <div
-          class="tab-pane fade"
-          id="tab2"
-          role="tabpanel"
-          aria-labelledby="tab2-tab"
-        >
-          <div class="grid">
-            <div class="card">
-              <img
-                src="images/image1.jpg"
-                class="card-img-top"
-                alt="تصویر ۲"
-                onclick="showFullscreen(this)"
-              />
-              <div class="card-body">
-                <p class="card-text" style="color: #ffffff">
-                  حامی پوشش زنده سریال بازی مرکب. نت‌باکس یک اندروید باکس است که
-                  تلویزیون معمولی شما را به یک تلویزیون هوشمند واقعی تبدیل
-                  می‌کند. با نت‌باکس می‌توانید به مجموعه‌ای کامل از فیلم و
-                  سریال‌های پلتفرم‌های مختلف دسترسی پیدا کنید.
-                </p>
-              </div>
-            </div>
-          </div>
+        <div class="round-btn" onclick="showModal(2)" style="margin-left: -50px;">
+          <img src="images/image2.jpg" alt="Button 2" />
+          <span>عنواعنوانن ۲</span>
         </div>
-        <!-- Add more cards for tab 3, 4, and 5 as needed -->
-        <div
-          class="tab-pane fade"
-          id="tab3"
-          role="tabpanel"
-          aria-labelledby="tab3-tab"
-        >
-          <div class="grid">
-            <div class="card">
-              <img
-                src="images/image1.jpg"
-                class="card-img-top"
-                alt="تصویر ۲"
-                onclick="showFullscreen(this)"
-              />
-              <div class="card-body">
-                <p class="card-text" style="color: #ffffff">
-                  حامی پوشش زنده سریال بازی مرکب. نت‌باکس یک اندروید باکس است که
-                  تلویزیون معمولی شما را به یک تلویزیون هوشمند واقعی تبدیل
-                  می‌کند. با نت‌باکس می‌توانید به مجموعه‌ای کامل از فیلم و
-                  سریال‌های پلتفرم‌های مختلف دسترسی پیدا کنید.
-                </p>
-              </div>
-            </div>
-          </div>
+        <div class="round-btn" onclick="showModal(3)" style="margin-left: 50px;">
+          <span>عنواعنوانعنوانن ۳</span>
+          <img src="images/image2.jpg" alt="Button 3" />
         </div>
-        <!-- Add more cards for tab 3, 4, and 5 as needed -->
-        <div
-          class="tab-pane fade"
-          id="tab4"
-          role="tabpanel"
-          aria-labelledby="tab4-tab"
-        >
-          <div class="grid">
-            <div class="card">
-              <img
-                src="images/image1.jpg"
-                class="card-img-top"
-                alt="تصویر ۲"
-                onclick="showFullscreen(this)"
-              />
-              <div class="card-body">
-                <p class="card-text" style="color: #ffffff">
-                  حامی پوشش زنده سریال بازی مرکب. نت‌باکس یک اندروید باکس است که
-                  تلویزیون معمولی شما را به یک تلویزیون هوشمند واقعی تبدیل
-                  می‌کند. با نت‌باکس می‌توانید به مجموعه‌ای کامل از فیلم و
-                  سریال‌های پلتفرم‌های مختلف دسترسی پیدا کنید.
-                </p>
-              </div>
-            </div>
-          </div>
+        <div class="round-btn" onclick="showModal(4)" style="margin-left: -50px;" >
+          <img src="images/image2.jpg" alt="Button 4" />
+          <span>عنوان ۴</span>
         </div>
-        <!-- Add more cards for tab 3, 4, and 5 as needed -->
-        <div
-          class="tab-pane fade"
-          id="tab5"
-          role="tabpanel"
-          aria-labelledby="tab5-tab"
-        >
-          <div class="grid">
-            <div class="card">
-              <img
-                src="images/image1.jpg"
-                class="card-img-top"
-                alt="تصویر ۲"
-                onclick="showFullscreen(this)"
-              />
-              <div class="card-body">
-                <p class="card-text" style="color: #ffffff">توضیحات تصویر ۲</p>
-              </div>
-            </div>
-          </div>
+        <div class="round-btn" onclick="showModal(5)" style="margin-left: 50px;">
+          <span>عنو توضیحات برایان ۵</span>
+          <img src="images/image2.jpg" alt="Button 5" />
         </div>
-        <!-- Add more cards for tab 3, 4, and 5 as needed -->
+        <div class="round-btn" onclick="showModal(6)" style="margin-left: -50px;">
+          <img src="images/image2.jpg" alt="Button 6" />
+          <span>عنو توضیحات برایان ۶</span>
+        </div>
       </div>
     </div>
 
-    <div class="fullscreen" id="fullscreen" onclick="hideFullscreen()">
-      <img id="fullscreenImage" src="" alt="تمام صفحه" />
+    <!-- Modal -->
+    <div class="modal fade" id="modal" tabindex="-1" aria-hidden="true"
+    style="
+    background-image: url('images/bg1.jpg'); /* Background pattern */
+    background-repeat: repeat; /* Repeat the pattern */
+    background-size: auto;"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle">عنوان</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <!-- Cards inside modal -->
+            <div class="modal-card">
+              <img src="images/image1.jpg" alt="Image 1" class="modal-img" onclick="openFullscreen(this)" />
+              <div class="modal-card-body">
+                <p>متن توضیحات
+                  توضیحات برای
+                  ب توضیحات برای
+                  توضیحات برایرای تصویر ۱ توضیحات برای
+                  توضیحات برای
+                </p>
+              </div>
+            </div>
+            <div class="modal-card">
+              <img src="images/image1.jpg" alt="Image 2" class="modal-img" onclick="openFullscreen(this)" />
+              <div class="modal-card-body">
+                <p>متن توضیحا
+                  توضیحات برای
+                  توضیحات برای
+                  توضیحات برای
+                  توضیحات برای
+                  ت برای تصویر ۲</p>
+              </div>
+            </div>
+            <!-- More modal cards can be added here -->
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -403,15 +276,29 @@
         });
       }
 
-      function showFullscreen(image) {
-        const fullscreen = document.getElementById("fullscreen");
-        const fullscreenImage = document.getElementById("fullscreenImage");
-        fullscreenImage.src = image.src;
-        fullscreen.style.display = "flex";
+      function showModal(modalIndex) {
+        document.getElementById('modalTitle').textContent = ``;
+
+        // Show the modal
+        const modal = new bootstrap.Modal(document.getElementById('modal'));
+        modal.show();
       }
 
-      function hideFullscreen() {
-        document.getElementById("fullscreen").style.display = "none";
+      function openFullscreen(img) {
+        // Check if the browser supports fullscreen mode
+        if (img.requestFullscreen) {
+          img.requestFullscreen();
+        } else if (img.mozRequestFullScreen) { /* Firefox */
+          img.mozRequestFullScreen();
+        } else if (img.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+          img.webkitRequestFullscreen();
+        } else if (img.msRequestFullscreen) { /* IE/Edge */
+          img.msRequestFullscreen();
+        }
+
+        // Optionally, you can zoom the image to fit the screen
+        //img.style.maxWidth = "100%";
+        //img.style.maxHeight = "100%";
       }
     </script>
   </body>
