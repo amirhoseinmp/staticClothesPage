@@ -22,7 +22,7 @@
         direction: rtl;
         background-color: #121212;
         color: #ff0000;
-        background-image: url('images/bg.jpg'); /* Background pattern */
+        background-image: url("images/bg.jpg"); /* Background pattern */
         background-repeat: repeat; /* Repeat the pattern */
         background-size: auto;
       }
@@ -96,7 +96,7 @@
 
       .round-btn {
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         background-color: #ffffff;
         color: rgb(0, 0, 0);
@@ -145,12 +145,12 @@
         border-radius: 10px;
         display: flex;
         overflow: hidden;
-        border: 1px solid #ffffff;
       }
 
       .modal-card img {
         width: 120px;
         object-fit: cover;
+        border: 1px solid #ffffff;
       }
 
       .modal-card-body {
@@ -163,11 +163,12 @@
     <div
       id="page1"
       class="page active-page d-flex flex-column justify-content-center align-items-center vh-100 text-center bg-primary text-white"
-    style="
-    background-image: url('images/bg1.jpg'); /* Background pattern */
-    background-repeat: repeat; /* Repeat the pattern */
-    background-size: auto;"
-      >
+      style="
+        background-image: url('images/bg1.jpg'); /* Background pattern */
+        background-repeat: repeat; /* Repeat the pattern */
+        background-size: auto;
+      "
+    >
       <div class="container">
         <div class="mb-4">
           <h1 class="display-4 fw-bold">به وبسایت خوش آمدید</h1>
@@ -188,72 +189,100 @@
       <div class="fab" onclick="navigateToPage(1)">
         <i class="fas fa-home"></i>
       </div>
-      
+
       <!-- Round Buttons Listed Below Each Other -->
       <div class="round-btns">
         <!-- Repeat this block for each button -->
-        <div class="round-btn" onclick="showModal(1)" style="margin-left: 50px;">
-          <span>عنتوضیحاتوان ۱</span>
+        <div class="round-btn" onclick="showModal(1)" style="margin-left: 50px">
           <img src="images/image2.jpg" alt="Button 1" />
+          <span>عنتوضیحاتوان ۱</span>
         </div>
-        <div class="round-btn" onclick="showModal(2)" style="margin-left: -50px;">
-          <img src="images/image2.jpg" alt="Button 2" />
+        <div
+          class="round-btn"
+          onclick="showModal(2)"
+          style="margin-left: -50px; justify-content: flex-end"
+        >
           <span>عنواعنوانن ۲</span>
+          <img src="images/image2.jpg" alt="Button 2" />
         </div>
-        <div class="round-btn" onclick="showModal(3)" style="margin-left: 50px;">
-          <span>عنواعنوانعنوانن ۳</span>
+        <div class="round-btn" onclick="showModal(3)" style="margin-left: 50px">
           <img src="images/image2.jpg" alt="Button 3" />
+          <span>عنواعنوانعنوانن ۳</span>
         </div>
-        <div class="round-btn" onclick="showModal(4)" style="margin-left: -50px;" >
-          <img src="images/image2.jpg" alt="Button 4" />
+        <div
+          class="round-btn"
+          onclick="showModal(4)"
+          style="margin-left: -50px; justify-content: flex-end"
+        >
           <span>عنوان ۴</span>
+          <img src="images/image2.jpg" alt="Button 4" />
         </div>
-        <div class="round-btn" onclick="showModal(5)" style="margin-left: 50px;">
-          <span>عنو توضیحات برایان ۵</span>
+        <div class="round-btn" onclick="showModal(5)" style="margin-left: 50px">
           <img src="images/image2.jpg" alt="Button 5" />
+          <span>عنو توضیحات برایان ۵</span>
         </div>
-        <div class="round-btn" onclick="showModal(6)" style="margin-left: -50px;">
-          <img src="images/image2.jpg" alt="Button 6" />
+        <div
+          class="round-btn"
+          onclick="showModal(6)"
+          style="margin-left: -50px; justify-content: flex-end"
+        >
           <span>عنو توضیحات برایان ۶</span>
+          <img src="images/image2.jpg" alt="Button 6" />
         </div>
       </div>
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="modal" tabindex="-1" aria-hidden="true"
-    style="
-    background-image: url('images/bg1.jpg'); /* Background pattern */
-    background-repeat: repeat; /* Repeat the pattern */
-    background-size: auto;"
+    <div
+      class="modal fade"
+      id="modal"
+      tabindex="-1"
+      aria-hidden="true"
+      style="
+        background-image: url('images/bg1.jpg'); /* Background pattern */
+        background-repeat: repeat; /* Repeat the pattern */
+        background-size: auto;
+      "
     >
       <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="modalTitle">عنوان</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body">
             <!-- Cards inside modal -->
             <div class="modal-card">
-              <img src="images/image1.jpg" alt="Image 1" class="modal-img" onclick="openFullscreen(this)" />
+              <img
+                src="images/image1.jpg"
+                alt="Image 1"
+                class="modal-img"
+                onclick="openFullscreen(this)"
+              />
               <div class="modal-card-body">
-                <p>متن توضیحات
-                  توضیحات برای
-                  ب توضیحات برای
-                  توضیحات برایرای تصویر ۱ توضیحات برای
-                  توضیحات برای
+                <p>
+                  متن توضیحات توضیحات برای ب توضیحات برای توضیحات برایرای تصویر
+                  ۱ توضیحات برای توضیحات برای
                 </p>
               </div>
             </div>
             <div class="modal-card">
-              <img src="images/image1.jpg" alt="Image 2" class="modal-img" onclick="openFullscreen(this)" />
+              <img
+                src="images/image1.jpg"
+                alt="Image 2"
+                class="modal-img"
+                onclick="openFullscreen(this)"
+              />
               <div class="modal-card-body">
-                <p>متن توضیحا
-                  توضیحات برای
-                  توضیحات برای
-                  توضیحات برای
-                  توضیحات برای
-                  ت برای تصویر ۲</p>
+                <p>
+                  متن توضیحا توضیحات برای توضیحات برای توضیحات برای توضیحات برای
+                  ت برای تصویر ۲
+                </p>
               </div>
             </div>
             <!-- More modal cards can be added here -->
@@ -277,10 +306,10 @@
       }
 
       function showModal(modalIndex) {
-        document.getElementById('modalTitle').textContent = ``;
+        document.getElementById("modalTitle").textContent = ``;
 
         // Show the modal
-        const modal = new bootstrap.Modal(document.getElementById('modal'));
+        const modal = new bootstrap.Modal(document.getElementById("modal"));
         modal.show();
       }
 
@@ -288,11 +317,14 @@
         // Check if the browser supports fullscreen mode
         if (img.requestFullscreen) {
           img.requestFullscreen();
-        } else if (img.mozRequestFullScreen) { /* Firefox */
+        } else if (img.mozRequestFullScreen) {
+          /* Firefox */
           img.mozRequestFullScreen();
-        } else if (img.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+        } else if (img.webkitRequestFullscreen) {
+          /* Chrome, Safari and Opera */
           img.webkitRequestFullscreen();
-        } else if (img.msRequestFullscreen) { /* IE/Edge */
+        } else if (img.msRequestFullscreen) {
+          /* IE/Edge */
           img.msRequestFullscreen();
         }
 
